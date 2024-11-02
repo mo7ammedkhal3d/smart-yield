@@ -3,7 +3,6 @@ import YearDate from "./YearDate";
 import styles from './ResultsTable.module.css';
 
 const ResultsTable = props =>{
-  console.log(props.yearDate);
   
   let [yearsDate,setYearsDate] = useState(props.yearlyData);
 
@@ -19,16 +18,15 @@ const ResultsTable = props =>{
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>YEAR NUMBER</td>
-            <td>TOTAL SAVINGS END OF YEAR</td>
-            <td>INTEREST GAINED IN YEAR</td>
-            <td>TOTAL INTEREST GAINED</td>
-            <td>TOTAL INVESTED CAPITAL</td>
-          </tr>
-          {yearsDate.map((yearDate => (
-            <YearDate YearDate={YearDate}/>
-          )))}
+          {props.data.map(yearData =>(
+            <tr>
+              <td>{yearData.year}</td>
+              <td>{yearData.savingEndOfYear}</td>
+              <td>{yearData.yearlyInterest}</td>
+              <td>{yearData.savingEndOfYear - props.initialInvestment - yearData.yearlyContribution * yearData.year}</td>
+              <td>{props.initialInvestment + yearData.yearlyContribution * yearData.year}</td>
+            </tr>
+          ))}
         </tbody>
       </table>
     );

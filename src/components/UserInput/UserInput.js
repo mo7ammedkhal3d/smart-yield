@@ -13,10 +13,10 @@ const UserInput = props =>{
 
     const submitHandler = event =>{
         event.preventDefault();
-        
+
         props.onCalcualte(userInput);
 
-        resstFailds();
+        resstHandler();
     }
 
     const changeHandler = (key,value)=>{
