@@ -25,6 +25,7 @@ function App() {
         const yearlyInterest = currentSavings * expectedReturn;
         currentSavings += yearlyInterest + yearlyContribution;
         yearlyData.push({
+          id:Math.random().toString(),
           year: i + 1,
           yearlyInterest: yearlyInterest,
           savingsEndOfYear: currentSavings,

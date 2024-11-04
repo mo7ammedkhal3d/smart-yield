@@ -19,7 +19,7 @@ const ResultsTable = props =>{
         </thead>
         <tbody>
           {props.data.map(yearData =>(
-            <tr>
+            <tr key={yearData.id}>
               <td>{yearData.year}</td>
               <td>{yearData.savingsEndOfYear}</td>
               <td>{yearData.yearlyInterest}</td>

@@ -9,6 +9,7 @@ const initalUserInput = {
 };
 
 const UserInput = props =>{
+
     const [userInput,setUserInput] = useState(initalUserInput);
 
     const submitHandler = event =>{
@@ -34,16 +35,32 @@ const UserInput = props =>{
       // props.onReset();
     }
 
+    const onClickHandler= event=>{
+      let temp= event.target.value;
+      setUserInput((prevInput)=>{
+        return{
+          ...prevInput,
+          [event.target.id]:'',
+        }
+      });
+    }
+
+    const onBlurHandler = event=>{
+      if(event.target.value === ''){
+        resstHandler();
+      }
+    }
+
     return(
         <form onSubmit={submitHandler} className={styles.form}>
         <div className={styles['input-group']}>
           <p>
             <label htmlFor="current-savings">Current Savings ($)</label>
-            <input value={userInput['current-savings']} type="number" id="current-savings" onChange={event =>{changeHandler(event.target.id,event.target.value)}}/>
+            <input value={userInput['current-savings']} type="number" id="current-savings" onChange={event =>{changeHandler(event.target.id,event.target.value)}} onClick={onClickHandler} onBlur={onBlurHandler}/>
           </p>
           <p>
             <label htmlFor="yearly-contribution">Yearly Savings ($)</label>
-            <input value={userInput['yearly-contribution']} type="number" id="yearly-contribution" onChange={event =>{changeHandler(event.target.id,event.target.value)}}/>
+            <input value={userInput['yearly-contribution']} type="number" id="yearly-contribution" onChange={event =>{changeHandler(event.target.id,event.target.value)}} onClick={onClickHandler} onBlur={onBlurHandler}/>
           </p>
         </div>
         <div className={styles['input-group']}>
@@ -51,11 +68,11 @@ const UserInput = props =>{
             <label htmlFor="expected-return">
               Expected Interest (%, per year)
             </label>
-            <input value={userInput['expected-return']} type="number" id="expected-return" onChange={event =>{changeHandler(event.target.id,event.target.value)}}/>
+            <input value={userInput['expected-return']} type="number" id="expected-return" onChange={event =>{changeHandler(event.target.id,event.target.value)}} onClick={onClickHandler} onBlur={onBlurHandler}/>
           </p>
           <p>
             <label htmlFor="duration">Investment Duration (years)</label>
-            <input value={userInput['duration']} type="number" id="duration" onChange={event =>{changeHandler(event.target.id,event.target.value)}}/>
+            <input value={userInput['duration']} type="number" id="duration" onChange={event =>{changeHandler(event.target.id,event.target.value)}} onClick={onClickHandler} onBlur={onBlurHandler}/>
           </p>
         </div>
         <p className={styles.actions}>
