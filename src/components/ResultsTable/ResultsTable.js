@@ -21,9 +21,9 @@ const ResultsTable = props =>{
           {props.data.map(yearData =>(
             <tr>
               <td>{yearData.year}</td>
-              <td>{yearData.savingEndOfYear}</td>
+              <td>{yearData.savingsEndOfYear}</td>
               <td>{yearData.yearlyInterest}</td>
-              <td>{yearData.savingEndOfYear - props.initialInvestment - yearData.yearlyContribution * yearData.year}</td>
+              <td>{yearData.savingsEndOfYear - props.initialInvestment - yearData.yearlyContribution * yearData.year}</td>
               <td>{props.initialInvestment + yearData.yearlyContribution * yearData.year}</td>
             </tr>
           ))}

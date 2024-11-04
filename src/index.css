@@ -14,3 +14,10 @@ body {
   color: #e1eeeb;
 }
 
+.no-investment{
+  font-size: 1.2rem;
+  text-align: center;
+  margin: 10vw;
+  font-weight: bold;
+}
+
