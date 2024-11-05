@@ -35,6 +35,7 @@ const UserInput = props =>{
 
     const onClickHandler= event=>{
       prevValue = userInput[event.target.id];
+
       setUserInput((prevInput)=>{
         return{
           ...prevInput,
@@ -44,6 +45,7 @@ const UserInput = props =>{
     }
 
     const onBlurHandler = event=>{
+      
       if(event.target.value === ''){
         setUserInput((pervInput)=>{
           return{
