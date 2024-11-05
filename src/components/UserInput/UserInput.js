@@ -9,7 +9,7 @@ const initalUserInput = {
 };
 
 const UserInput = props =>{
-    let prevValue = '';
+    const [tempValue,setTempValue] = useState('');
     const [userInput,setUserInput] = useState(initalUserInput);
 
     const submitHandler = event =>{
@@ -34,7 +34,10 @@ const UserInput = props =>{
     }
 
     const onClickHandler= event=>{
-      prevValue = userInput[event.target.id];
+      if(event.target.value !== ''){
+        setTempValue(event.target.value);
+      }
+      
       setUserInput((prevInput)=>{
         return{
           ...prevInput,
@@ -48,7 +51,7 @@ const UserInput = props =>{
         setUserInput((pervInput)=>{
           return{
             ...pervInput,
-            [event.target.id]:prevValue,
+            [event.target.id]:tempValue,
           }
         })
       }
