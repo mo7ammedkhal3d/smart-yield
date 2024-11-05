@@ -8,7 +8,7 @@ const initalUserInput = {
   'duration':10
 };
 
-const fallback = {
+const initalState = {
   'current-savings':true,
   'yearly-contribution':true,
   'expected-return':true,
@@ -16,12 +16,23 @@ const fallback = {
 }
 
 const UserInput = props =>{
-    const [isValid,setIsValid] = useState(fallback);
+    const [isValid,setIsValid] = useState(initalState);
     const [userInput,setUserInput] = useState(initalUserInput);
 
     const submitHandler = event =>{
         event.preventDefault();
 
+        const formElements = event.target.elements;
+
+        const inputIds = Array.from(formElements).filter(element=>element.tagName === 'INPUT')
+        .map(input=>input.id);
+        
+        for(let i=0;i<inputIds.length-1;i++){
+          if(userInput[inputIds[i]] === ''){
+            return;
+          }
+        }
+        
         props.onCalcualte(userInput);
 
         resstHandler();
@@ -54,9 +65,11 @@ const UserInput = props =>{
 
     const resstHandler = ()=>{
       setUserInput(initalUserInput);
+      setIsValid(initalState);
     }
 
     const clickClearHandler = ()=>{
+      setIsValid(initalState);
       props.onClearData();                                                            
     }
 
