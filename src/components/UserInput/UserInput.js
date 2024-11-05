@@ -86,7 +86,7 @@ const UserInput = props =>{
           <button type="reset" className={styles.buttonAlt} onClick={resstHandler}>
             Reset
           </button>
-          <button type="submit" className={styles.button}>
+          <button type="submit" className={styles.button}> make some thing
             Calculate
           </button>
           <button type="button" className={styles.button} onClick={clickClearHandler}>Clear</button>
