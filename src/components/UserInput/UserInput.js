@@ -9,7 +9,7 @@ const initalUserInput = {
 };
 
 const UserInput = props =>{
-
+    let prevValue = '';
     const [userInput,setUserInput] = useState(initalUserInput);
 
     const submitHandler = event =>{
@@ -31,12 +31,10 @@ const UserInput = props =>{
 
     const resstHandler = ()=>{
       setUserInput(initalUserInput);
-
-      // props.onReset();
     }
 
     const onClickHandler= event=>{
-      let temp= event.target.value;
+      prevValue = userInput[event.target.id];
       setUserInput((prevInput)=>{
         return{
           ...prevInput,
@@ -47,8 +45,17 @@ const UserInput = props =>{
 
     const onBlurHandler = event=>{
       if(event.target.value === ''){
-        resstHandler();
+        setUserInput((pervInput)=>{
+          return{
+            ...pervInput,
+            [event.target.id]:prevValue,
+          }
+        })
       }
+    }
+
+    const clickClearHandler = ()=>{
+      props.onClearData();                                                            
     }
 
     return(
@@ -82,6 +89,7 @@ const UserInput = props =>{
           <button type="submit" className={styles.button}>
             Calculate
           </button>
+          <button type="button" className={styles.button} onClick={clickClearHandler}>Clear</button>
         </p>
       </form>
     );

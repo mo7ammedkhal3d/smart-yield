@@ -11,7 +11,6 @@ function App() {
     setUserInput(userInput);
   }
 
-
     let yearlyData = []; 
 
 
@@ -34,10 +33,14 @@ function App() {
       }
     }
 
+    const onClearDataHandler = ()=>{
+      setUserInput(null);
+    }
+
   return (
     <div>
       <Header/>
-      <UserInput onCalcualte={calculateHandler}/>
+      <UserInput onCalcualte={calculateHandler} onClearData={onClearDataHandler}/>
       {!userInput && <p className='no-investment'>No investment calcualted yet</p>}
       {userInput && <ResultsTable data={yearlyData} initialInvestment={userInput['current-savings']}/>} 
     </div>
