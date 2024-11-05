@@ -1,7 +1,13 @@
 import React,{useState} from 'react';
 import Header from './components/Header/Header'
 import UserInput from './components/UserInput/UserInput';
+// import UserInput2 from './components/UserInput/UserInput2';
 import ResultsTable from './components/ResultsTable/ResultsTable';
+
+//#region Note for UserInput2
+  // UserInput2 is Another Solution that aunsure that the failds is not empty string 
+//#endregion
+
 
 function App() {
 
@@ -41,6 +47,7 @@ function App() {
     <div>
       <Header/>
       <UserInput onCalcualte={calculateHandler} onClearData={onClearDataHandler}/>
+      {/* <UserInput2 onCalcualte={calculateHandler} onClearData={onClearDataHandler}/> */}
       {!userInput && <p className='no-investment'>No investment calcualted yet</p>}
       {userInput && <ResultsTable data={yearlyData} initialInvestment={userInput['current-savings']}/>} 
     </div>

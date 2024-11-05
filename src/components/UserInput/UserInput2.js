@@ -8,15 +8,8 @@ const initalUserInput = {
   'duration':10
 };
 
-const fallback = {
-  'current-savings':true,
-  'yearly-contribution':true,
-  'expected-return':true,
-  'duration':true
-}
-
-const UserInput = props =>{
-    const [isValid,setIsValid] = useState(fallback);
+const UserInput2 = props =>{
+    const [tempValue,setTempValue] = useState('');
     const [userInput,setUserInput] = useState(initalUserInput);
 
     const submitHandler = event =>{
@@ -28,22 +21,6 @@ const UserInput = props =>{
     }
 
     const changeHandler = (key,value)=>{
-      if(value === ''){        
-        setIsValid((prevFallback)=>{
-          return{
-            ...prevFallback,
-            [key]:false
-          }
-        });
-      } else if(value !== ''){
-        setIsValid((prevFallback)=>{
-          return{
-            ...prevFallback,
-            [key]:true
-          }
-        });
-      }
-
       setUserInput((pervInput)=>{
         return {
           ...pervInput,
@@ -56,6 +33,30 @@ const UserInput = props =>{
       setUserInput(initalUserInput);
     }
 
+    const onClickHandler= event=>{
+      if(event.target.value !== ''){
+        setTempValue(event.target.value);
+      }
+
+      setUserInput((prevInput)=>{
+        return{
+          ...prevInput,
+          [event.target.id]:'',
+        }
+      });
+    }
+
+    const onBlurHandler = event=>{
+      if(event.target.value === ''){
+        setUserInput((pervInput)=>{
+          return{
+            ...pervInput,
+            [event.target.id]:tempValue,
+          }
+        })
+      }
+    }
+
     const clickClearHandler = ()=>{
       props.onClearData();                                                            
     }
@@ -65,11 +66,11 @@ const UserInput = props =>{
         <div className={styles['input-group']}>
           <p>
             <label htmlFor="current-savings">Current Savings ($)</label>
-            <input className={!isValid['current-savings'] ? styles.fallback:''} value={userInput['current-savings']} type="number" id="current-savings" onChange={event =>{changeHandler(event.target.id,event.target.value)}}/>
+            <input value={userInput['current-savings']} type="number" id="current-savings" onChange={event =>{changeHandler(event.target.id,event.target.value)}} onClick={onClickHandler} onBlur={onBlurHandler}/>
           </p>
           <p>
             <label htmlFor="yearly-contribution">Yearly Savings ($)</label>
-            <input className={!isValid['yearly-contribution'] ? styles.fallback: ''} value={userInput['yearly-contribution']} type="number" id="yearly-contribution" onChange={event =>{changeHandler(event.target.id,event.target.value)}}/>
+            <input value={userInput['yearly-contribution']} type="number" id="yearly-contribution" onChange={event =>{changeHandler(event.target.id,event.target.value)}} onClick={onClickHandler} onBlur={onBlurHandler}/>
           </p>
         </div>
         <div className={styles['input-group']}>
@@ -77,11 +78,11 @@ const UserInput = props =>{
             <label htmlFor="expected-return">
               Expected Interest (%, per year)
             </label>
-            <input className={!isValid['expected-return'] ? styles.fallback: ''} value={userInput['expected-return']} type="number" id="expected-return" onChange={event =>{changeHandler(event.target.id,event.target.value)}}/>
+            <input value={userInput['expected-return']} type="number" id="expected-return" onChange={event =>{changeHandler(event.target.id,event.target.value)}} onClick={onClickHandler} onBlur={onBlurHandler}/>
           </p>
           <p>
             <label htmlFor="duration">Investment Duration (years)</label>
-            <input className={!isValid['duration'] ? styles.fallback: ''} value={userInput['duration']} type="number" id="duration" onChange={event =>{changeHandler(event.target.id,event.target.value)}}/>
+            <input value={userInput['duration']} type="number" id="duration" onChange={event =>{changeHandler(event.target.id,event.target.value)}} onClick={onClickHandler} onBlur={onBlurHandler}/>
           </p>
         </div>
         <p className={styles.actions}>
@@ -97,4 +98,4 @@ const UserInput = props =>{
     );
 }
 
-export default UserInput;
+export default UserInput2;
